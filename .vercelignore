@@ -1,4 +1,7 @@
 .git/
+.vercel/
+.env
+.env.*
 .github/
 .openai/
 dist/
