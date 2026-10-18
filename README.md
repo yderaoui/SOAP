@@ -2,6 +2,8 @@
 
 A complete local browser arcade shooter inspired by the supplied @soapweb3 profile. The happy ape surfs a blue soap hoverboard through two waves of crypto-feed hazards, then fights The Algorithm.
 
+The homepage is now the SOAP Universe showcase: Overview, Coin, Story, Roadmap, and The Clean Run challenge. The arcade lives at `/play`. Coin fields distinguish the concept from unannounced launch details; the character's origin story is explicitly fictional.
+
 ## Play
 
 Double-click **START SOAP GAME.cmd**, or run `npm start` in this folder and open http://localhost:3000. Node.js is required. No installation, package downloads, API keys, or internet connection are needed.
@@ -19,11 +21,19 @@ The game uses native Canvas 2D and ES modules. Simulation is isolated in `public
 
 ## Checks
 
-`npm test` runs 14 game simulation tests. `npm run check` checks the JavaScript syntax. `npm run build` copies the static game to `dist/` for hosting; `.openai/hosting.json` records its hosting project.
+`npm test` runs 19 game and challenge tests. `npm run check` checks the JavaScript syntax. `npm run build` copies the static game to `dist/` for hosting; `.openai/hosting.json` records its earlier Sites hosting project.
 
 `npm run test:browser` runs the release browser suite. It needs Playwright and a browser: the test helper uses a separately installed `playwright` module, or the module directory in `SOAP_PLAYWRIGHT_PATH`. Set `SOAP_BROWSER_PATH` to a browser executable when needed. `SOAP_BASE_URL` selects the server to test (default: http://localhost:3000). Test reports and screenshots go into ignored `qa-artifacts/`.
 
 The browser suite covers loading, keyboard/touch input, countdown, pause, help, sound, dash, Mega Rinse, fullscreen, responsive layouts, offline operation, victory/loss results, score-card PNGs, persistent best scores, restart, reduced motion, and unavailable browser storage. Deterministic browser scenarios exercise the real simulation's victory/loss transitions without modifying production files.
+
+`npm run test:showcase` checks all five dashboard views, responsive navigation, artwork switching, lore tabs, roadmap accordions, challenge rules, game links, local history, and unavailable storage. `npm run test:playability` verifies a qualifying challenge run using normal simulation inputs.
+
+## The Clean Run
+
+Practice target: score **25,000+ points**, defeat the boss, and finish within **90 seconds of active play**, all in one run. The game records local run history and shows practice progress on the dashboard.
+
+**US $1,000 is a proposed prize. No cash competition is live.** Funding, eligibility, dates, verified score review, and payout terms remain unconfirmed. No cash entries or claims are accepted, and browser-local results are not verified prize entries. See [CHALLENGE-RULES.md](CHALLENGE-RULES.md).
 
 ## GitHub and Vercel
 

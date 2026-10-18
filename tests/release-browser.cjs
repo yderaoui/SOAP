@@ -6,7 +6,7 @@ async function stdinConfig(){
  return await new Promise((resolve,reject)=>{const onData=chunk=>{value+=chunk;if(value.includes('\n')||value.includes('\r')){process.stdin.removeListener('data',onData);if(raw)process.stdin.setRawMode(false);process.stdin.pause();try{resolve(JSON.parse(value));}catch{reject(new Error('Invalid browser QA configuration.'));}}};process.stdin.on('data',onData);process.stdin.resume();});
 }
 (async()=>{
- const config=await stdinConfig(),url=config.baseURL||baseURL,origin=new URL(url).origin;
+ const config=await stdinConfig(),url=new URL('/play',config.baseURL||baseURL).href,origin=new URL(url).origin;
  const browser=await chromium.launch(launchOptions),errors=[],failures=[],checks=[];
  const record=checks.push.bind(checks);checks.push=(...items)=>{console.log('PASS:',...items);return record(...items);};
  async function context(options={}){const c=await browser.newContext({acceptDownloads:true,...options});if(config.headers){await c.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue({headers:{...r.request().headers(),...config.headers}}):r.continue());}return c;}

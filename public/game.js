@@ -1,5 +1,6 @@
 import {SoapGame,C} from './game-core.js';
 import {Renderer} from './renderer.js';
+import {CHALLENGE,challengeResult,saveRun} from './challenge.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const stage=$('#stage'),canvas=$('#game'),hero=$('#hero-character');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -76,7 +77,7 @@ canvas.addEventListener('pointerdown',event=>{if(event.button!==0)return;if(['pl
 canvas.addEventListener('pointermove',event=>{if(['playing','countdown'].includes(game.state)&&(event.pointerType==='mouse'||touching)){input.pointer=pointerPosition(event);}});
 canvas.addEventListener('pointerup',()=>touching=false);canvas.addEventListener('pointercancel',()=>touching=false);
 function showEnd(event){
- finalStats={...event};const won=event.won,isBest=event.score>best;$('#end-kicker').textContent=won?'YOU ESCAPED THE TIMELINE':'ANOTHER APE LOST TO THE FEED';
+ finalStats={...event};try{saveRun(localStorage,event);}catch{}const challenge=challengeResult(event);$('#practice-result')?.remove();const practice=document.createElement('div');practice.id='practice-result';practice.className='practice-result';const summary=document.createElement('strong');summary.textContent=challenge.completed?'CLEAN RUN COMPLETE':'THE CLEAN RUN / PRACTICE';const detail=document.createElement('span');detail.textContent=challenge.completed?'25,000+ points. Boss defeated. Under 90 seconds.':`${Math.min(CHALLENGE.minScore,event.score).toLocaleString()} / 25,000 points · ${event.won?'Boss defeated':'Defeat the boss'} · 90-second limit`;const link=document.createElement('a');link.href='/#challenge';link.textContent='$1,000 proposed prize · competition not live';practice.append(summary,detail,link);$('.end-stats').after(practice);const won=event.won,isBest=event.score>best;$('#end-kicker').textContent=won?'YOU ESCAPED THE TIMELINE':'ANOTHER APE LOST TO THE FEED';
  $('#end-title').replaceChildren(document.createTextNode(won?'FEED OFF.':'YOU GOT'),document.createElement('br'));const span=document.createElement('span');span.textContent=won?'HAPPY ON.':'RINSED.';$('#end-title').append(span);
  const jokes={'A RED CANDLE':'The red candle sends its regards.','A SCAM DM':'“Hello dear” was your final warning.','A RUG PULL':'You were standing on the investment thesis.','A REPLY GUY':'He really did have one more thing to add.','THE ALGORITHM':'It recommended this L specifically for you.'};$('#end-joke').textContent=won?'You defeated the Algorithm. Now go touch something that isn’t a screen.':jokes[event.cause]||'The timeline remains undefeated. For now.';
  $('#final-score').textContent=String(event.score).padStart(6,'0');$('#final-time').textContent=formatTime(event.seconds);$('#final-combo').textContent=`×${event.combo}`;$('#final-kills').textContent=event.kills;$('#new-best').hidden=!isBest;
