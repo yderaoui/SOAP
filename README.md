@@ -25,6 +25,14 @@ The game uses native Canvas 2D and ES modules. Simulation is isolated in `public
 
 The browser suite covers loading, keyboard/touch input, countdown, pause, help, sound, dash, Mega Rinse, fullscreen, responsive layouts, offline operation, victory/loss results, score-card PNGs, persistent best scores, restart, reduced motion, and unavailable browser storage. Deterministic browser scenarios exercise the real simulation's victory/loss transitions without modifying production files.
 
+## GitHub and Vercel
+
+GitHub repository: https://github.com/yderaoui/SOAP
+
+Import the repository into Vercel with the repository root as the project root. `vercel.json` selects the static framework, runs `npm run build`, and publishes `dist/`. There are no environment variables or runtime services to configure. A linked Vercel project can also be deployed with `vercel --prod`.
+
+The Windows launchers and local Node server are development conveniences. Vercel serves the built static game. Local project links and credentials in `.vercel/` and `.env*` are ignored by Git.
+
 ## Art direction and provenance
 
 Retro-futuristic arcade: #0A0014, cyan #00FFFF, magenta #FF006E, local Orbitron and Space Mono fonts, CRT scanlines, neon glow, and a scrolling perspective grid.

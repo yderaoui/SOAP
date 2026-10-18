@@ -1,0 +1,16 @@
+.git/
+.github/
+.openai/
+dist/
+node_modules/
+tests/
+qa-artifacts/
+*-preview.png
+score-card.png
+*.log
+qa.cjs
+diagnose.cjs
+layout-check.cjs
+playtest.cjs
+launch.ps1
+START SOAP GAME.cmd

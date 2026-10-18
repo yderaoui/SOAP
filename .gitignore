@@ -7,3 +7,6 @@ qa-artifacts/
 .sites-runtime/
 playwright-report/
 test-results/
+.vercel/
+.env
+.env.*
