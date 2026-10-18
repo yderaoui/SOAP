@@ -1,0 +1,9 @@
+dist/
+node_modules/
+*.log
+*-preview.png
+score-card.png
+qa-artifacts/
+.sites-runtime/
+playwright-report/
+test-results/
